@@ -1,0 +1,24 @@
+# Agent Manifest — AgentRegistry entry point.
+# Root-level keys only: the registry keys into this mapping directly, so anything
+# nested under an `agent:` block is invisible to it. Runtime-tunable parameters
+# belong in config/config.yaml, not here.
+
+id: "SVC-C2-019"
+name: "svc_c2_019_hr_onboarding"
+namespace: "svc"
+version: "0.1.0"
+enabled: true
+description: "HR Onboarding Process Orchestration Agent"
+class: "src.graph.graph.HROnboardingOrchestrationGraph"
+
+category: "Cat 2"
+industry: "SVC"
+base_type: "Orchestration"  # checklist -> PII gate -> HITL -> provisioning -> reminders -> status -> report
+generation_mode: "deterministic"
+
+# Security — the outer boundary requires a verified caller.
+required_trust_level: "VERIFIED_EXTERNAL"
+
+requires:
+  secrets: []
+  extras: []

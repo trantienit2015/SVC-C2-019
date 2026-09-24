@@ -1,0 +1,16 @@
+# Runtime parameters — loaded separately by the registry and passed to the graph
+# as Graph(config=...). Static manifest fields live in config/agent.yaml.
+
+max_retry: 3
+timeout_s: 30
+# memory_enabled is mandatory alongside hitl.enabled: the checkpointer is what
+# makes the interrupt()/resume pause possible.
+memory_enabled: true
+hitl:
+  enabled: true
+  max_hitl: 8
+  # false: this deployment is invoked one-shot with no resume channel, so the
+  # HR compliance gate defers approval (checklist items hr_approval=pending,
+  # provisioning requests pending_hr_approval) instead of pausing forever.
+  # Set true when a gateway that can resume the interrupted thread is in place.
+  confirmation_required: false
